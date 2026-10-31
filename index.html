@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which March Sister Are You? | A Little Women Personality Quiz</title>
+<meta name="description" content="Ten questions to find out whether you're Meg, Jo, Beth or Amy March from Little Women.">
+<meta property="og:title" content="Which March Sister Are You?">
+<meta property="og:description" content="Ten questions to find out whether you're Meg, Jo, Beth or Amy.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#34406a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23b4566b'/%3E%3Cpath d='M32 14l4 12 12 4-12 4-4 12-4-12-12-4 12-4z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lora:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3a2c2e; --muted:#7d6a68; --line:#ead9c6; --card:#fffaf1; --paper:#fbf1e1;
+    --meg:#c4566f; --jo:#3b7ea1; --beth:#6f9a6e; --amy:#d0902a;
+    --theme:#a8566b;
+    --night:#2d3659; --dusk:#76588a; --rose:#d98f8c; --cream:#f6e3c9;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);font-family:'Lora',Georgia,serif;line-height:1.55;min-height:100vh;
+    background:linear-gradient(180deg,var(--night) 0,var(--dusk) 380px,var(--rose) 780px,var(--cream) 1100px) fixed,var(--cream);
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;margin:0}
+  button,input{font:inherit}
+  #snow{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  #snow i{position:absolute;top:-10px;background:#fff;border-radius:50%;animation:fall linear infinite}
+  @keyframes fall{from{transform:translate(0,-5vh)}to{transform:translate(40px,108vh)}}
+  .wrap{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:26px 16px 50px}
+  .brand{text-align:center;color:#f7e6d3;font-family:'Pinyon Script',cursive;font-size:26px;margin:2px 0 14px;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+
+  .card{
+    background:var(--card);border-radius:20px;overflow:hidden;position:relative;
+    box-shadow:0 0 0 1px rgba(255,255,255,.5) inset,0 24px 50px -22px rgba(30,20,50,.65),0 3px 0 rgba(255,255,255,.35);
+    animation:rise .5s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .card::before{ /* inner gilded frame */
+    content:"";position:absolute;inset:8px;border:1px solid rgba(208,144,42,.35);border-radius:14px;pointer-events:none;z-index:2
+  }
+  .pad{padding:26px 30px 32px}
+  .scene{display:block;width:100%;height:auto}
+
+  .eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:11.5px;color:var(--muted);text-align:center}
+  .title{font-size:50px;line-height:1;text-align:center;margin:8px 0 12px;
+    background:linear-gradient(90deg,var(--meg),var(--jo) 40%,var(--beth) 70%,var(--amy));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);text-align:center;margin:0 auto 20px;max-width:520px}
+  .sisters-row{display:flex;justify-content:center;gap:18px;margin:6px 0 22px;flex-wrap:wrap}
+  .sis{display:flex;flex-direction:column;align-items:center;gap:4px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px}
+  .sis svg{width:58px;height:58px;filter:drop-shadow(0 4px 6px rgba(60,30,30,.25));transition:transform .25s}
+  .sis:hover svg{transform:translateY(-4px) rotate(-4deg)}
+
+  .name-box{max-width:380px;margin:0 auto 18px;text-align:center}
+  .name-box label{display:block;font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;margin-bottom:6px}
+  .name-box input{width:100%;padding:13px 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;text-align:center;font-size:18px;color:var(--ink);outline:none;transition:.2s}
+  .name-box input:focus{border-color:var(--meg);box-shadow:0 0 0 4px rgba(196,86,111,.15)}
+  .center{text-align:center}
+  .btn{background:linear-gradient(135deg,var(--meg),#a9475f);color:#fff;border:0;border-radius:999px;padding:14px 34px;font-size:17px;letter-spacing:.03em;cursor:pointer;
+    box-shadow:0 10px 20px -10px rgba(169,71,95,.9);transition:.2s}
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.07)}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none}
+  .btn.themed{background:linear-gradient(135deg,var(--theme),color-mix(in srgb,var(--theme) 70%,#000));box-shadow:0 10px 20px -10px var(--theme)}
+
+  /* quiz */
+  .qhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;color:var(--muted);font-size:13px}
+  .dots{display:flex;gap:6px;margin:0 0 6px;justify-content:center}
+  .dots i{width:100%;max-width:44px;height:7px;border-radius:99px;background:var(--line);transition:.4s}
+  .dots i.done{background:linear-gradient(90deg,var(--meg),var(--amy))}
+  .dots i.now{background:var(--amy);box-shadow:0 0 0 3px rgba(208,144,42,.25)}
+  .q{font-size:32px;line-height:1.15;margin:16px 0 20px;text-align:center}
+  .orn{display:block;margin:0 auto 4px;width:120px;height:14px;color:var(--amy)}
+  .opts{display:grid;gap:11px}
+  .opt{display:flex;gap:14px;align-items:center;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 16px;color:var(--ink);cursor:pointer;
+    transition:transform .15s,border-color .15s,box-shadow .15s,background .15s;animation:rise .4s ease both}
+  .opt:nth-child(2){animation-delay:.05s}.opt:nth-child(3){animation-delay:.1s}.opt:nth-child(4){animation-delay:.15s}
+  .opt:hover{border-color:var(--amy);transform:translateY(-2px);box-shadow:0 10px 18px -14px rgba(120,70,20,.7);background:#fffdf8}
+  .opt.sel{border-color:var(--meg);background:#fdf0ee}
+  .opt .let{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:17px;
+    background:var(--paper);color:var(--amy);border:1px solid var(--line);transition:.15s}
+  .opt:hover .let{background:var(--amy);color:#fff}
+  .nav{margin-top:16px;display:flex;justify-content:space-between}
+  .linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;padding:6px 0;font-size:14px;cursor:pointer}
+  .linkbtn[disabled]{opacity:.3;cursor:default;text-decoration:none}
+  .hidden{display:none}
+
+  /* result */
+  .res-top{padding:34px 20px 70px;text-align:center;color:#fff;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 20% 10%,rgba(255,255,255,.28) 0,transparent 40%),linear-gradient(160deg,var(--theme),color-mix(in srgb,var(--theme) 55%,#1c1230))}
+  .res-top::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:44px;background:var(--card);border-radius:50% 50% 0 0/100% 100% 0 0}
+  .res-top .pet{position:absolute;inset:0;pointer-events:none}
+  .res-top .pet i{position:absolute;top:-20px;width:9px;height:9px;border-radius:50% 0 50% 0;background:rgba(255,255,255,.55);animation:fall linear infinite}
+  .hello{font-family:'Pinyon Script',cursive;font-size:30px;margin:0 0 4px;position:relative}
+  .res-emblem{width:130px;height:130px;margin:6px auto 4px;position:relative;animation:pop .7s cubic-bezier(.2,1.4,.4,1) both;filter:drop-shadow(0 12px 16px rgba(0,0,0,.35))}
+  @keyframes pop{from{transform:scale(.3) rotate(-25deg);opacity:0}to{transform:none;opacity:1}}
+  .res-name{font-size:68px;line-height:1;margin:0;position:relative;text-shadow:0 4px 18px rgba(0,0,0,.3)}
+  .tag{font-style:italic;font-family:'Cormorant Garamond',serif;font-size:22px;margin:2px 0 0;position:relative;opacity:.95}
+  .res-body{padding:4px 30px 32px}
+  .traits{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px;padding:0;list-style:none;justify-content:center}
+  .traits li{border-radius:99px;padding:4px 14px;font-size:14px;color:var(--theme);background:color-mix(in srgb,var(--theme) 11%,#fff);border:1px solid color-mix(in srgb,var(--theme) 35%,#fff)}
+  .bars{margin:24px 0 8px;display:grid;gap:12px}
+  .bar-row{display:grid;grid-template-columns:34px 52px 1fr 46px;gap:10px;align-items:center;font-size:15px}
+  .bar-row svg{width:34px;height:34px}
+  .bar{height:13px;border-radius:99px;background:var(--line);overflow:hidden}
+  .bar>i{display:block;height:100%;width:0;border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+  .pct{text-align:right;font-variant-numeric:tabular-nums}
+  .second{color:var(--muted);font-size:14.5px;text-align:center;margin:8px 0 0}
+  details{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:14px}
+  summary{cursor:pointer;color:var(--ink)}
+  table{border-collapse:collapse;width:100%;margin-top:10px;font-size:13px}
+  td,th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:center}
+  th:first-child,td:first-child{text-align:left}
+  .actions{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .foot{position:relative;z-index:1;text-align:center;font-size:12.5px;color:#6a5a52;padding:0 16px 30px}
+  .foot span{background:rgba(255,250,241,.7);padding:4px 12px;border-radius:99px}
+  @media(max-width:540px){
+    .title{font-size:40px}.q{font-size:26px}.pad{padding:22px 18px 28px}.res-body{padding:4px 18px 28px}
+    .res-name{font-size:56px}.sis svg{width:50px;height:50px}.bar-row{grid-template-columns:30px 46px 1fr 42px;gap:8px}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="snow" aria-hidden="true"></div>
+
+<div class="wrap">
+  <div class="brand">a Little Women quiz</div>
+
+  <!-- INTRO -->
+  <section id="intro" class="card">
+    <svg class="scene" viewBox="0 0 700 250" role="img" aria-label="A snowy cottage at dusk with glowing windows" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2d3659"/><stop offset=".6" stop-color="#76588a"/><stop offset="1" stop-color="#e49a8c"/></linearGradient>
+        <radialGradient id="glow"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#f3b24a"/></radialGradient>
+      </defs>
+      <rect width="700" height="250" fill="url(#sky)"/>
+      <g fill="#fff"><circle cx="70" cy="40" r="1.6"/><circle cx="150" cy="75" r="1.2"/><circle cx="240" cy="30" r="1.8"/><circle cx="330" cy="62" r="1.2"/><circle cx="470" cy="28" r="1.6"/><circle cx="560" cy="70" r="1.3"/><circle cx="640" cy="35" r="1.8"/><circle cx="410" cy="88" r="1"/></g>
+      <circle cx="565" cy="62" r="26" fill="#fff4d6"/><circle cx="575" cy="55" r="24" fill="#6a5486" opacity=".0"/>
+      <path d="M0 185 Q120 150 240 180 T480 172 T700 170 V250 H0Z" fill="#d9cfe0"/>
+      <path d="M0 205 Q160 175 300 202 T700 195 V250 H0Z" fill="#f7efe8"/>
+      <!-- pines -->
+      <g fill="#33503f"><path d="M70 205 l30-80 30 80z"/><path d="M85 170 l15-55 15 55z" opacity=".0"/><path d="M118 210 l22-60 22 60z"/><path d="M560 205 l30-84 30 84z"/><path d="M612 212 l22-62 22 62z"/></g>
+      <g fill="#fff" opacity=".9"><path d="M84 146 l16-22 16 22 -16-6z"/><path d="M129 168 l11-16 11 16 -11-4z"/><path d="M574 140 l16-22 16 22 -16-6z"/><path d="M623 170 l11-16 11 16 -11-4z"/></g>
+      <rect x="93" y="205" width="14" height="12" fill="#4a3a30"/><rect x="583" y="205" width="14" height="12" fill="#4a3a30"/>
+      <!-- cottage -->
+      <g>
+        <rect x="270" y="130" width="170" height="86" fill="#8c5a45"/>
+        <path d="M255 134 L355 74 L455 134 Z" fill="#5b3a3a"/>
+        <path d="M255 134 L355 74 L455 134 L445 134 L355 82 L265 134Z" fill="#f7efe8"/>
+        <rect x="395" y="78" width="22" height="42" fill="#6e4636"/><rect x="391" y="72" width="30" height="8" fill="#f7efe8"/>
+        <rect x="288" y="152" width="40" height="38" rx="3" fill="url(#glow)"/><path d="M308 152v38M288 171h40" stroke="#7a4a35" stroke-width="3"/>
+        <rect x="382" y="152" width="40" height="38" rx="3" fill="url(#glow)"/><path d="M402 152v38M382 171h40" stroke="#7a4a35" stroke-width="3"/>
+        <rect x="337" y="162" width="36" height="54" rx="18 18 0 0" fill="#4a2f2f"/><circle cx="366" cy="192" r="2.3" fill="#e9b45a"/>
+        <circle cx="355" cy="112" r="9" fill="url(#glow)"/><path d="M355 103v18M346 112h18" stroke="#7a4a35" stroke-width="2"/>
+        <ellipse cx="355" cy="218" rx="110" ry="8" fill="#fff" opacity=".9"/>
+      </g>
+      <!-- smoke -->
+      <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"><path d="M406 62 q-10 -14 2 -26 q12 -12 0 -26"/></g>
+      <!-- lamp -->
+      <g><rect x="206" y="150" width="4" height="68" fill="#3a2c2e"/><circle cx="208" cy="144" r="9" fill="url(#glow)"/><circle cx="208" cy="144" r="20" fill="#ffe9a8" opacity=".25"/></g>
+    </svg>
+    <div class="pad">
+      <div class="eyebrow">A personality quiz</div>
+      <h1 class="title">Which March sister are you?</h1>
+      <p class="lead">Ten questions about how you spend your days, handle trouble and picture your future. Your answers are tallied and matched to Meg, Jo, Beth or Amy.</p>
+      <div class="sisters-row" id="sisRow"></div>
+      <div class="name-box">
+        <label for="name">First, what's your name?</label>
+        <input id="name" type="text" maxlength="30" placeholder="Your name" autocomplete="given-name">
+      </div>
+      <div class="center"><button class="btn" id="start">Begin the quiz</button></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="card hidden">
+    <div class="pad">
+      <div class="dots" id="dots"></div>
+      <div class="qhead"><span id="counter"></span><span id="who"></span></div>
+      <svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 7h42M76 7h42"/><path d="M60 1l3 6-3 6-3-6z" fill="currentColor"/><circle cx="50" cy="7" r="1.6" fill="currentColor"/><circle cx="70" cy="7" r="1.6" fill="currentColor"/></svg>
+      <h2 class="q" id="qtext"></h2>
+      <div class="opts" id="opts"></div>
+      <div class="nav"><button class="linkbtn" id="back">← Back</button></div>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result" class="card hidden"></section>
+</div>
+
+<div class="foot"><span>Inspired by the characters of <i>Little Women</i> by Louisa May Alcott. A fan-made quiz for fun.</span></div>
+
+<script>
+/* ============================================================
+   SCORING MODEL
+   - Every option gives 3 points to ONE sister (primary) and
+     1 point to a second sister (secondary / "shared trait").
+   - Every answer is worth exactly 4 points; 10 questions = 40 points.
+   - Each question has exactly one primary option per sister, and the
+     secondary link rotates between 3 pairings; each pairing gives every
+     sister exactly one bonus point, so every sister can earn the same
+     number of points in total (no sister is favoured by structure).
+   - Result % = sister's points / 40.
+   ============================================================ */
+
+const SISTERS = {
+  M:{name:'Meg', color:'#c4566f',
+     tagline:'The warm-hearted homemaker',
+     text:"You are the steady heart of your circle. You care deeply about family, loyalty and making a place feel like home, and you show love through practical, thoughtful acts. You enjoy beauty and a little elegance, and you sometimes wrestle with wanting more than you have. Your gift is warmth with good sense: people trust you to hold things together.",
+     traits:['Nurturing','Responsible','Romantic','Gracious','Home-loving']},
+  J:{name:'Jo', color:'#3b7ea1',
+     tagline:'The fiery writer',
+     text:"You are independent, imaginative and impossible to squeeze into a mould. You say what you think, chase big ideas, and would rather forge your own path than follow the expected one. Your temper and stubbornness can get you into trouble, but your loyalty and drive are fierce. Your gift is courage: you make things happen.",
+     traits:['Ambitious','Outspoken','Creative','Independent','Fiercely loyal']},
+  B:{name:'Beth', color:'#6f9a6e',
+     tagline:'The gentle heart',
+     text:"You are quiet, kind and deeply attuned to other people's feelings. You find joy in small things, in music, in simple pleasures and in the people closest to you, and you avoid conflict and the spotlight. You may be shy, but your gentleness is a strength that calms every room. Your gift is compassion: you make people feel safe.",
+     traits:['Gentle','Selfless','Musical','Shy','Peacemaker']},
+  A:{name:'Amy', color:'#d0902a',
+     tagline:'The poised artist',
+     text:"You are charming, artistic and aware of how the world sees you. You love beauty and refinement, you are determined to grow into your talents, and you are not afraid to want a bigger life. You can be vain or dramatic when things don't go your way, but you learn and adapt faster than most. Your gift is grace with ambition: you aim high and polish what you do.",
+     traits:['Artistic','Poised','Determined','Sociable','Resourceful']}
+};
+const KEYS = ['M','J','B','A'];
+
+/* Secondary-point pairings (each is a derangement: every sister gives and receives exactly once) */
+const PAIRINGS = [
+  {M:'B', J:'A', B:'M', A:'J'},
+  {M:'A', J:'B', B:'J', A:'M'},
+  {M:'J', J:'M', B:'A', A:'B'}
+];
+const PRIMARY = 3, SECONDARY = 1;
+
+/* Each question: the answer that belongs to each sister (M, J, B, A). */
+const QUESTIONS = [
+  {q:"A snowy Saturday, and nothing is expected of you. How do you most want to spend it?",
+   o:{M:"Hosting a cosy gathering with tea and something I baked myself",
+      J:"Up in a quiet corner with a stack of books and a story I'm writing",
+      B:"Playing music softly while the house is calm and peaceful",
+      A:"Sketching or planning a trip to see something beautiful"}},
+  {q:"Which description would your friends most likely give of you?",
+   o:{M:"Warm and dependable, the one who looks after everyone",
+      J:"Bold and outspoken, a bit of a whirlwind",
+      B:"Gentle and quiet, the one who notices how everyone feels",
+      A:"Charming and polished, someone who knows how to make an impression"}},
+  {q:"Someone has treated you unfairly. What do you do?",
+   o:{M:"Keep my composure, brood a little, then talk it through calmly",
+      J:"Say exactly what I think straight away, then storm off to cool down",
+      B:"Forgive quickly, since I'd rather keep the peace than argue",
+      A:"Go cold and dramatic for a while, then find a clever way to win them round"}},
+  {q:"Money has become tight. How do you cope?",
+   o:{M:"Budget carefully and make do, though I miss the nicer things",
+      J:"Take on any work I can to earn my way out of it",
+      B:"I don't need much. I find joy in simple things and share what I have",
+      A:"I dislike it a lot, and I start looking for a way to improve my situation"}},
+  {q:"Which flaw would you most readily admit to?",
+   o:{M:"A weakness for pretty things and comparing myself with others",
+      J:"A hot temper and a stubborn streak",
+      B:"Shyness, and a fear of stepping out into the world",
+      A:"Vanity and wanting the finest of everything"}},
+  {q:"You've been invited to a grand party. What's your plan?",
+   o:{M:"Wear something elegant, dance, and enjoy the conversation",
+      J:"Go reluctantly, then hide in a corner with a book or sneak out early",
+      B:"Politely decline, since a small evening with a few close people is better",
+      A:"Arrive perfectly dressed and make sure I'm noticed"}},
+  {q:"A close friend falls ill. What do you do?",
+   o:{M:"Take charge: organise their care, cook meals, keep things running",
+      J:"Stay by their side, read aloud, and do anything I can, with fierce determination",
+      B:"Sit quietly with them, a calm and soothing presence",
+      A:"Bring flowers and thoughtful gifts, and lift their spirits with lively company"}},
+  {q:"You've received a little unexpected money. What do you buy?",
+   o:{M:"Something pretty or useful for the home and family",
+      J:"New books, paper and pens",
+      B:"Sheet music, or a gift for someone I love",
+      A:"Art supplies, or something fashionable and well made"}},
+  {q:"How do you see love and marriage?",
+   o:{M:"Love matters more than wealth, and a simple, happy home is enough",
+      J:"My independence comes first, and I'm not sure marriage is for me",
+      B:"I'm content with the love of my family and don't look for romance",
+      A:"I want a match that satisfies both the heart and practical sense"}},
+  {q:"How would you most like to be remembered?",
+   o:{M:"As the loving, devoted heart of my family",
+      J:"As someone who followed her own path and wrote her own story",
+      B:"As someone kind who made other people's lives sweeter",
+      A:"As someone who grew into real talent and elegance"}}
+];
+
+/* Build options with explicit point values */
+const TEST = QUESTIONS.map((item, qi) => {
+  const pair = PAIRINGS[qi % PAIRINGS.length];
+  return {
+    q: item.q,
+    options: KEYS.map(k => ({
+      text: item.o[k],
+      points: {[k]: PRIMARY, [pair[k]]: SECONDARY},   // e.g. {M:3, B:1}
+      primary: k
+    }))
+  };
+});
+const MAX_TOTAL = TEST.length * (PRIMARY + SECONDARY);   // 40
+
+/* Pure scoring function (answers = array of chosen option objects) */
+function score(answers){
+  const totals = {M:0,J:0,B:0,A:0}, primaries = {M:0,J:0,B:0,A:0};
+  answers.forEach(opt => {
+    for (const k in opt.points) totals[k] += opt.points[k];
+    primaries[opt.primary]++;
+  });
+  const lastPrimary = answers.length ? answers[answers.length-1].primary : null;
+  // Rank: total points -> number of primary picks -> last answer -> fixed order
+  const ranked = KEYS.slice().sort((a,b) =>
+    (totals[b]-totals[a]) ||
+    (primaries[b]-primaries[a]) ||
+    ((b===lastPrimary)-(a===lastPrimary)) ||
+    (KEYS.indexOf(a)-KEYS.indexOf(b)));
+  return {totals, primaries, ranked};
+}
+
+/* Percentages that always add up to exactly 100 (largest remainder) */
+function percentages(totals){
+  const raw = KEYS.map(k => totals[k]/MAX_TOTAL*100);
+  const floors = raw.map(Math.floor);
+  let left = 100 - floors.reduce((a,b)=>a+b,0);
+  raw.map((v,i)=>[v-floors[i],i]).sort((a,b)=>b[0]-a[0]).forEach(([,i])=>{ if(left>0){floors[i]++;left--;} });
+  const out = {}; KEYS.forEach((k,i)=>out[k]=floors[i]); return out;
+}
+
+/* ---------------- UI ---------------- */
+/* Emblems: a coloured disc with a small drawing for each sister */
+function emblem(k){
+  const c = SISTERS[k].color;
+  const art = {
+    M:`<g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+         <circle cx="50" cy="44" r="19"/><path d="M50 44c-6-1-8-8-3-11 6-3 12 2 10 8-2 7-12 8-16 2-4-7 2-16 11-16 10 0 16 10 11 19"/>
+         <path d="M50 63v20M50 74c-8-2-12-8-12-12 8 0 12 5 12 12zM50 78c8-2 12-8 12-12-8 0-12 5-12 12z" fill="#fff" fill-opacity=".25"/></g>`,
+    J:`<g stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M74 20C52 24 34 42 30 70c22-8 40-26 44-50z" fill="#fff" fill-opacity=".92" stroke="none"/>
+         <path d="M72 22C56 40 42 54 30 76" fill="none" stroke="${c}" stroke-width="2.4"/>
+         <path d="M30 76l-4 8" fill="none"/>
+         <path d="M58 58l8 2M52 50l9 1M46 62l7 2M64 44l7 0" fill="none" stroke="${c}" stroke-width="2"/>
+         <rect x="32" y="80" width="36" height="10" rx="2" fill="#fff" fill-opacity=".25"/></g>`,
+    B:`<g fill="#fff"><ellipse cx="36" cy="72" rx="9" ry="6.5" transform="rotate(-18 36 72)"/><ellipse cx="66" cy="66" rx="9" ry="6.5" transform="rotate(-18 66 66)"/>
+         <rect x="42" y="30" width="3.6" height="42"/><rect x="72" y="24" width="3.6" height="42"/>
+         <path d="M42 30l33-6v10l-33 6z"/></g>
+       <path d="M24 90h52" stroke="#fff" stroke-opacity=".5" stroke-width="2.4" stroke-linecap="round"/>`,
+    A:`<g stroke="none"><path d="M50 22c-20 0-34 12-34 28 0 12 10 22 22 22 7 0 7-6 4-9-3-4 0-9 6-9h12c10 0 18-6 18-14 0-10-12-18-28-18z" fill="#fff" fill-opacity=".95"/>
+         <circle cx="34" cy="42" r="5" fill="#c4566f"/><circle cx="50" cy="34" r="5" fill="#3b7ea1"/><circle cx="66" cy="40" r="5" fill="#6f9a6e"/><circle cx="72" cy="54" r="4.4" fill="${c}"/></g>
+       <g stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M70 82L86 52"/></g><path d="M66 90l4-8 6 3z" fill="#fff"/>`
+  }[k];
+  return `<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="48" fill="${c}"/><circle cx="50" cy="50" r="44" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.6"/>${art}</svg>`;
+}
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const $ = id => document.getElementById(id);
+let order = [], current = 0, answers = [], userName = '';
+
+function show(id){ ['intro','quiz','result'].forEach(s => $(s).classList.toggle('hidden', s!==id)); window.scrollTo({top:0}); }
+
+function start(){
+  userName = $('name').value.trim();           // kept only in memory, never stored or sent anywhere
+  order = TEST.map(t => shuffle(t.options));   // option order is shuffled so position never biases the result
+  current = 0; answers = [];
+  $('dots').innerHTML = TEST.map(()=>'<i></i>').join('');
+  $('who').textContent = userName ? 'for ' + userName : '';
+  show('quiz'); render();
+}
+
+function render(){
+  const t = TEST[current];
+  $('qtext').textContent = t.q;
+  $('counter').textContent = `Question ${current+1} of ${TEST.length}`;
+  [...$('dots').children].forEach((d,i)=>{ d.className = i<current ? 'done' : i===current ? 'now' : ''; });
+  $('back').disabled = current===0;
+  const box = $('opts'); box.innerHTML = '';
+  order[current].forEach((opt,i) => {
+    const b = document.createElement('button');
+    b.className = 'opt' + (answers[current]===opt ? ' sel' : '');
+    const l = document.createElement('span'); l.className='let'; l.textContent = 'abcd'[i];
+    const s = document.createElement('span'); s.textContent = opt.text;
+    b.append(l, s);
+    b.onclick = () => choose(opt);
+    box.appendChild(b);
+  });
+}
+
+function choose(opt){
+  answers[current] = opt;
+  if (current < TEST.length-1){ current++; render(); }
+  else finish();
+}
+
+function finish(){
+  const {totals, primaries, ranked} = score(answers);
+  const pct = percentages(totals);
+  const wk = ranked[0], win = SISTERS[wk], second = SISTERS[ranked[1]];
+  const rows = ranked.map(k => `
+    <div class="bar-row">${emblem(k)}<b>${SISTERS[k].name}</b>
+      <div class="bar"><i data-w="${pct[k]}" style="background:${SISTERS[k].color}"></i></div>
+      <span class="pct">${pct[k]}%</span></div>`).join('');
+  const detail = KEYS.map(k => `<tr><td>${SISTERS[k].name}</td><td>${primaries[k]}</td><td>${totals[k]}</td><td>${totals[k]} / ${MAX_TOTAL}</td></tr>`).join('');
+  const close = totals[ranked[0]] - totals[ranked[1]] <= 3;
+
+  const r = $('result');
+  r.style.setProperty('--theme', win.color);
+  r.innerHTML = `
+    <div class="res-top">
+      <div class="pet" id="pet"></div>
+      <p class="hello" id="hello"></p>
+      <div class="res-emblem">${emblem(wk)}</div>
+      <h2 class="res-name">${win.name}</h2>
+      <p class="tag">${win.tagline}</p>
+    </div>
+    <div class="res-body">
+      <p>${win.text}</p>
+      <ul class="traits">${win.traits.map(t=>`<li>${t}</li>`).join('')}</ul>
+      <div class="bars">${rows}</div>
+      <p class="second">${close ? `It was close! You also have a lot of <b>${second.name}</b> in you.`
+                                : `Your second-closest sister is <b>${second.name}</b>.`}</p>
+      <details><summary>How your score was calculated</summary>
+        <p>Each answer gives 3 points to one sister and 1 point to another. Ten answers means ${MAX_TOTAL} points to share, and your percentages are each sister's share of those ${MAX_TOTAL}.</p>
+        <table><tr><th>Sister</th><th>Answers fully "hers"</th><th>Points</th><th>Of total</th></tr>${detail}</table>
+      </details>
+      <div class="actions"><button class="btn themed" id="copy">Copy my result</button><button class="btn ghost" id="again">Take it again</button></div>
+    </div>`;
+  $('hello').textContent = userName ? `${userName}, you are…` : 'You are…';
+  const pet = $('pet');
+  for (let i=0;i<14;i++){ const p=document.createElement('i'); p.style.left=Math.random()*100+'%'; p.style.animationDuration=(6+Math.random()*6)+'s'; p.style.animationDelay=(-Math.random()*8)+'s'; pet.appendChild(p); }
+  show('result');
+  $('again').onclick = () => { show('intro'); };
+  $('copy').onclick = async () => {
+    const txt = `${userName ? userName + ' is' : 'I am'} ${win.name} from Little Women! (` + ranked.map(k=>`${SISTERS[k].name} ${pct[k]}%`).join(', ') + ')';
+    let ok = false;
+    try { await navigator.clipboard.writeText(txt); ok = true; } catch(e){}
+    $('copy').textContent = ok ? 'Copied!' : txt;
+  };
+  requestAnimationFrame(()=>setTimeout(()=>{
+    document.querySelectorAll('.bar>i').forEach(el => el.style.width = el.dataset.w+'%');
+  },80));
+}
+
+/* ---------------- init ---------------- */
+$('sisRow').innerHTML = KEYS.map(k => `<div class="sis">${emblem(k)}<span>${SISTERS[k].name}</span></div>`).join('');
+$('start').onclick = start;
+$('name').addEventListener('keydown', e => { if(e.key==='Enter') start(); });
+$('back').onclick = () => { if(current>0){ current--; render(); } };
+(function snow(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const f = $('snow');
+  for (let i=0;i<38;i++){
+    const s = document.createElement('i'), z = 2 + Math.random()*4;
+    s.style.cssText = `left:${Math.random()*100}%;width:${z}px;height:${z}px;opacity:${.35+Math.random()*.5};animation-duration:${9+Math.random()*10}s;animation-delay:${-Math.random()*16}s`;
+    f.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
